@@ -1,0 +1,97 @@
+using System;
+
+namespace SteamKit2
+{
+    /// <summary>
+    /// The status of a trade request.
+    /// </summary>
+    public enum ETradeRequestStatus
+    {
+        /// Trade was accepted.
+        Accepted = 0,
+        /// Trade was rejected.
+        Rejected = 1,
+        /// Trade was cancelled.
+        Cancelled = 7,
+        /// Unknown trade reason.
+        Unknown = 8,
+        /// Trade is being done.
+        InTrade = 11,
+        /// Unknown trade reason.
+        Unknown2 = 12,
+        /// Trade timed out.
+        TimedOut = 13,
+    }
+
+    public partial class SteamTrading
+    {
+        /// <summary>
+        /// This callback is fired in response to receiving the result of a trade request.
+        /// </summary>
+        public sealed class TradeRequestCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the response of the request.
+            /// </summary>
+            public UInt32 Response;
+
+            /// <summary>
+            /// Gets the id of the trade request.
+            /// </summary>
+            public UInt32 TradeRequestId;
+
+            /// <summary>
+            /// Gets the SteamID of the other trader.
+            /// </summary>
+            public SteamID Other;
+
+            /// <summary>
+            /// Gets the status of the trade.
+            /// </summary>
+            public ETradeRequestStatus Status;
+
+            /// <summary>
+            /// Gets the trade transaction.
+            /// </summary>
+            public TradeSession Trade;
+        }
+
+        /// <summary>
+        /// This callback is fired in response to receiving a trade proposal.
+        /// </summary>
+        public sealed class TradeProposedCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the id of the trade request.
+            /// </summary>
+            public UInt32 TradeRequestId;
+
+            /// <summary>
+            /// Gets the SteamID of the other trader.
+            /// </summary>
+            public SteamID Other;
+        }
+
+        /// <summary>
+        /// Callback to request a trade cancel.
+        /// </summary>
+        public sealed class TradeCancelRequestCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the SteamID of the other trader.
+            /// </summary>
+            public SteamID Other;
+        }
+
+        /// <summary>
+        /// Callback to start a trade session.
+        /// </summary>
+        public sealed class TradeStartSessionCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the SteamID of the other trader.
+            /// </summary>
+            public SteamID Other;
+        }
+    }
+}
